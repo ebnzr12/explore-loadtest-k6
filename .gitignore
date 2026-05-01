@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Production build
+build/
+
+# Local env files
+.env
+.env.local
+
+# k6 Data (Optional: kalau lo mau hasil test di PC nggak ikut pindah)
+# backend/data/*.json
