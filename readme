@@ -1,0 +1,1 @@
+k6 run --out json=backend/data/result.json k6/script.js
