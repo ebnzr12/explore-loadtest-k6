@@ -120,6 +120,6 @@ export default function (data) {
 
 export function handleSummary(data) {
     return {
-        "Pemeriksaan_limit1000(070726 1735).html": htmlReport(data),
+        "Pemeriksaan_limit1000(080726 0639).html": htmlReport(data),
     };
 }
