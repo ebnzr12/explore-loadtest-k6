@@ -13,7 +13,7 @@ function App() {
 
   // 1. Ambil daftar file test
   useEffect(() => {
-    axios.get('http://localhost:3001/tests')
+    axios.get('http://localhost:5000/tests')
       .then(res => {
         setTests(res.data)
         if (res.data.length > 0) {
@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     if (!selectedTest) return
     const fetchData = () => {
-      axios.get(`http://localhost:3001/metrics?test=${selectedTest}`)
+      axios.get(`http://localhost:5000/metrics?test=${selectedTest}`)
         .then(res => setMetrics(res.data))
     }
     fetchData()
@@ -137,7 +137,7 @@ function App() {
             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3 lowercase">
               <span className="w-1 h-6 bg-emerald-500 rounded-full" /> Status Distribution
             </h3>
-            <div className="h-[250px] w-full flex items-center justify-center">
+            <div className="h-[250px] w-full flex items-center justify-center min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie data={statusData} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
@@ -171,7 +171,7 @@ function App() {
                <div className="flex items-center gap-2"><span className="w-3 h-1 bg-amber-500 rounded-full" /> Load (VUs)</div>
             </div>
           </div>
-          <div className="h-[400px] w-full">
+          <div className="h-[400px] w-full min-h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={latencyData}>
                 <CartesianGrid strokeDasharray="0" stroke="#1e293b" vertical={false} />

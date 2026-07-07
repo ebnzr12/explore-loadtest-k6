@@ -2,14 +2,14 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 
 export const options = {
-  vus: 3,
-  duration: '10s',
+  vus: 1,
+  duration: '4s',
 };
 
 export default function() {
   // const unikID = new Date().getTime();
   const body = {
-    phone_number: '089911223313',
+    phone_number: '081311223312',
     pin: '112233'
   };
 
@@ -45,13 +45,13 @@ export default function() {
       'Accept': 'application/json'
     }
 
-  const listSasaranRes = http.get('https://dev-app.epusconnext.id/api/audit-logs?page=1&api=/api/sasarans&unique_device=android-pq3a.190705.09121607-783437513-23127pn0cc-gracelte&last_sync=2026-04-23T08:30:36Z&limit=1000', {headers});
+  const getSasaranRes = http.get('https://dev-app.epusconnext.id/api/audit-logs?limit=1000&page=1&api=/api/sasarans&unique_device=android-pq3a.190705.09121607-783437513-23127pn0cc-gracelte&last_sync=2026-04-23T08:30:36Z', {headers});
   
-  const responseListsasaran = listSasaranRes.json();
-  console.log(responseListsasaran);
+  const responseGetSasaran = getSasaranRes.json();
+  console.log(responseGetSasaran);
 
-  check(listSasaranRes,{
-    'List sasaran: 200': (r) => r.status === 200,
+  check(getSasaranRes,{
+    'Get Sasaran: 200': (r) => r.status === 200,
   });
 
   sleep(1);
