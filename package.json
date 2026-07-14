@@ -4,7 +4,10 @@
   "description": "untuk load test epus connext sekaligus exploration",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "listKunjungan": "k6 run --out json=backend/data/result.json k6/listKunjunganFix.js",
+    "login": "k6 run --out json=backend/data/result.json k6/tests/auth/loginEpusConnext.test.js",
+    "listPemeriksaan": "k6 run --out json=backend/data/result.json k6/tests/pemeriksaan/listPemeriksaan.test.js"
   },
   "author": "Eben",
   "license": "ISC",
