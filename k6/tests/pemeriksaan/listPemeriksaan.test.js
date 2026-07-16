@@ -6,11 +6,11 @@ import { users } from '../../data/user.data.js';
 import { constantVus } from '../../scenarios/constantVus.js';
 import { getTimestamp } from '../../utils/Timestamp.js';
 import { generateReport } from '../../utils/report.js';
-import { baselineThresholds } from '../../config/thresholds.js';
+import { performanceThresholds } from '../../config/thresholds.js';
 
 export const options = {
-  ...constantVus(5, '10s'),
-  thresholds: baselineThresholds
+  ...constantVus(5, '40s'),
+  thresholds: performanceThresholds
 }
 
 export function setup(){

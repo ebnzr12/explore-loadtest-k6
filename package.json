@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "listKunjungan": "k6 run --out json=backend/data/result.json k6/listKunjunganFix.js",
+    "listKunjungan": "k6 run --out json=backend/data/result.json k6/tests/kunjungan/listKunjungan.test.js",
     "login": "k6 run --out json=backend/data/result.json k6/tests/auth/loginEpusConnext.test.js",
-    "listPemeriksaan": "k6 run --out json=backend/data/result.json k6/tests/pemeriksaan/listPemeriksaan.test.js"
+    "listPemeriksaan": "k6 run --out json=backend/data/result.json k6/tests/pemeriksaan/listPemeriksaan.test.js",
+    "listSasaran": "k6 run --out json=backend/data/result.json k6/tests/sasaran/getListSasaran.test.js"
   },
   "author": "Eben",
   "license": "ISC",
