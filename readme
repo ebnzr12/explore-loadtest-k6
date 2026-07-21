@@ -1,1 +1,2 @@
-k6 run --out json=backend/data/result.json k6/script.js
+untuk eksekusi k6 ini lihat dari package.json
+npm run nama_scripts. contoh: npm run listKunjungan
