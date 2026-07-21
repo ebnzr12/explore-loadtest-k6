@@ -16,25 +16,30 @@ export const options = {
 
 export function setup(){
 
-  //=========== USER YANG DIGUNAKAN UNTUK LOGIN ===========
-  const user = users[1];
+  const tokens = [];
 
-  //CREDENTIAL USER LOGIN
-  const response = login(
-    user.phone_number,
-    user.pin
-  );
+  //=========== LOGIN SEMUA USER DARI DATA ===========
+  for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    
+    //CREDENTIAL USER LOGIN
+    const response = login(
+      user.phone_number,
+      user.pin
+    );
 
-  //=========== CEK RESPONSE LOGIN ===========
-  check(response, {
-    'login status is 200': (r) => r.status === 200
-  });
+    //=========== CEK RESPONSE LOGIN ===========
+    check(response, {
+      [`login status for user ${i} is 200`]: (r) => r.status === 200
+    });
 
-  //=========== GET TOKEN SAAT LOGIN ===========
-  const token = response.json('data.access_token');
+    //=========== GET TOKEN SAAT LOGIN ===========
+    const token = response.json('data.access_token');
+    tokens.push(token);
+  }
 
   return {
-    token: token
+    tokens: tokens
   };
 }
 
@@ -42,9 +47,13 @@ export function setup(){
 // =========== ENDPOINT DARI SASARAN ===========
 export default function(data){
   
+  // =========== Dapatkan token berdasarkan VU index ===========
+  const tokenIndex = (__VU - 1) % data.tokens.length;
+  const token = data.tokens[tokenIndex];
+
   // =========== CEK RESPONSE SASARAN ===========
   const response = getListSasaran(
-    data.token,
+    token,
     1,
     100
   );
