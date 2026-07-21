@@ -4,6 +4,7 @@ node_modules/
 # Production build
 build/
 Report_Performance/
+backend/data/result.json
 
 # Local env files
 .env
