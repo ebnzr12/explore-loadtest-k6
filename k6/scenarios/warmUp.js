@@ -1,5 +1,5 @@
 export const warmUp = {
     executor: 'constant-vus',
-    vus: 2,
-    duration: '10s',
+    vus: 50,
+    duration: '1m',
 };

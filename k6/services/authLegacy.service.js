@@ -2,8 +2,8 @@ import http from 'k6/http';
 import { BASE_URL } from '../config/environment.js';
 import { check } from 'k6';
 
-export function login(phoneNumber, pin){
-    const url = `${BASE_URL}/api/auth/login`;
+export function loginLegacy(phoneNumber, pin){
+    const url = `${BASE_URL}/legacy/api/auth/login`;
 
     const payload = JSON.stringify({
         phone_number: phoneNumber,

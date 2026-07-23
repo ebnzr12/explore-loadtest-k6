@@ -1,11 +1,5 @@
-export function smokeTest(vus, duration) {
-    return {
-        scenarios:{
-            smoke_test: {
-                executor: 'constant-vus',
-                vus: vus,
-                duration: duration,
-            },
-        },
-    };
-}
+export const smokeTest = {
+            executor: 'constant-vus',
+            vus: 10,
+            duration: '1m',
+        }

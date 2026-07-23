@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 import { performanceThresholds } from '../../config/thresholds.js';
 import { login } from '../../services/auth.service.js';
-import { getListSasaran } from '../../services/sasaran.service.js';
+import { getListSasaranLegacy } from '../../services/sasaranLegacy.service.js';
 import { generateReport } from '../../utils/report.js';
 import { getTimestamp } from '../../utils/Timestamp.js';
 import { users } from '../../data/user.data.js';
@@ -59,7 +59,7 @@ export default function(data){
   const token = data.tokens[tokenIndex];
 
   // =========== CEK RESPONSE SASARAN ===========
-  const response = getListSasaran(
+  const response = getListSasaranLegacy(
     token,
     1,
     100

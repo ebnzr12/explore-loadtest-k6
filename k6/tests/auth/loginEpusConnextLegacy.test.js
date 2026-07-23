@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
-import { login } from '../../services/auth.service.js';
+import { loginLegacy } from '../../services/authLegacy.service.js';
 import { users } from '../../data/user.data.js';
 // import { constantVus } from '../../scenarios/constantVus.js';
 import { getTimestamp } from '../../utils/Timestamp.js';
@@ -34,7 +34,7 @@ export const options = {
 export default function () {
   const user = users[(__VU - 1) % users.length];
 
-  const response = login(
+  const response = loginLegacy(
     user.phone_number,
     user.pin
   );

@@ -5,9 +5,10 @@ import { performanceThresholds } from '../../config/thresholds.js';
 import { getTimestamp } from '../../utils/Timestamp.js';
 import { users } from '../../data/user.data.js';
 import { login } from '../../services/auth.service.js';
-import { getListKunjungan } from '../../services/kunjungan.service.js';
+// import { getListKunjungan } from '../../services/kunjungan.service.js';
 import { generateReport } from '../../utils/report.js';
 import { smokeTest, loadTest, stressTest, spikeTest, rampUp } from '../../scenarios/indexScenario.js';
+import { getListKunjunganLegacy } from '../../services/kunjunganLegacy.service.js';
 
 export const options = {
   // ...constantVus(10, '60s'),
@@ -57,7 +58,7 @@ const tokenIndex = (__VU - 1) % data.tokens.length;
 const token = data.tokens[tokenIndex];
 
 // =========== CEK RESPONSE KUNJUNGAN ===========
-  const response = getListKunjungan(
+  const response = getListKunjunganLegacy(
     token,
     1,
     100

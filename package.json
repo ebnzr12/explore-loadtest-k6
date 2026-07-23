@@ -8,7 +8,9 @@
     "listKunjungan": "k6 run --out json=backend/data/result.json k6/tests/kunjungan/listKunjungan.test.js",
     "login": "k6 run --out json=backend/data/result.json k6/tests/auth/loginEpusConnext.test.js",
     "listPemeriksaan": "k6 run --out json=backend/data/result.json k6/tests/pemeriksaan/listPemeriksaan.test.js",
-    "listSasaran": "k6 run --out json=backend/data/result.json k6/tests/sasaran/getListSasaran.test.js"
+    "listPemeriksaan1Account": "k6 run --out json=backend/data/result.json k6/tests/pemeriksaan/listPemeriksaanNoLoop.test.js",
+    "listSasaran": "k6 run --out json=backend/data/result.json k6/tests/sasaran/getListSasaran.test.js",
+    "listSasaranLegacy": "k6 run --out json=backend/data/result.json k6/tests/sasaran/getListSasaranLegacy.test.js"
   },
   "author": "Eben",
   "license": "ISC",

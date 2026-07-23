@@ -1,13 +1,14 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 import { login } from '../../services/auth.service.js';
-import { getListPemeriksaan } from '../../services/pemeriksaan.service.js';
+// import { getListPemeriksaan } from '../../services/pemeriksaan.service.js';
 import { users } from '../../data/user.data.js';
 // import { constantVus } from '../../scenarios/smokeTest.js';
 import { getTimestamp } from '../../utils/Timestamp.js';
 import { generateReport } from '../../utils/report.js';
 import { performanceThresholds } from '../../config/thresholds.js';
 import { smokeTest, loadTest, stressTest, spikeTest, rampUp } from '../../scenarios/indexScenario.js';
+import { getListPemeriksaanLegacy } from '../../services/pemeriksaanLegacy.service.js';
 
 export const options = {
   // ...constantVus(10, '60s'),
@@ -59,7 +60,7 @@ export default function(data) {
   // console.log("------------------------",token)
 
   // =========== CEK RESPONSE PEMERIKSAAN ===========
-  const response = getListPemeriksaan(
+  const response = getListPemeriksaanLegacy(
     token,
     1,
     100

@@ -1,2 +1,286 @@
-untuk eksekusi k6 ini lihat dari package.json
-npm run nama_scripts. contoh: npm run listKunjungan
+# 🚀 Performance Testing with k6
+
+Repository ini digunakan untuk melakukan **API Performance Testing** menggunakan **k6**.
+
+## 📂 Project Structure
+
+```
+explore-loadtest-k6/
+│
+├── k6/
+│   ├── tests/
+│   │   ├── auth/
+│   │   ├── kunjungan/
+│   │   ├── pemeriksaan/
+│   │   └── ...
+│   │
+│   ├── services/
+│   │   ├── auth.service.js
+│   │   ├── kunjungan.service.js
+│   │   └── ...
+│   │
+│   ├── scenarios/
+│   │   ├── warmUp.js
+│   │   ├── loadTest.js
+│   │   ├── spikeTest.js
+│   │   ├── stressTest.js
+│   │   ├── soakTest.js
+│   │   └── constantVus.js
+│   │
+│   ├── config/
+│   │   ├── env.js
+│   │   └── thresholds.js
+│   │
+│   ├── data/
+│   │   └── user.data.js
+│   │
+│   ├── utils/
+│   │   ├── report.js
+│   │   └── timestamp.js
+│   │
+│   └── reports/
+│
+└── README.md
+```
+
+---
+
+# 📦 Prerequisites
+
+Pastikan sudah menginstall:
+
+- Node.js
+- k6
+- Git
+
+Cek versi
+
+```bash
+node -v
+npm -v
+k6 version
+```
+
+---
+
+# 📥 Install
+
+Clone repository
+
+```bash
+git clone <repository-url>
+```
+
+Masuk ke project
+
+```bash
+cd explore-loadtest-k6
+```
+
+Install dependency
+
+```bash
+npm install
+```
+
+---
+
+# ▶️ Menjalankan Test
+
+Contoh menjalankan test
+
+```bash
+k6 run k6/tests/kunjungan/listKunjungan.test.js
+```
+
+atau
+
+```bash
+npm run listKunjungan
+```
+
+*(Sesuaikan dengan script pada `package.json`.)*
+
+---
+
+# ⚙️ Performance Scenarios
+
+Seluruh skenario disimpan pada folder
+
+```
+k6/scenarios/
+```
+
+| Scenario | Tujuan |
+|----------|--------|
+| warmUp | Memastikan service siap menerima traffic |
+| constantVus | Beban tetap selama durasi tertentu |
+| loadTest | Simulasi beban normal |
+| spikeTest | Lonjakan traffic secara tiba-tiba |
+| stressTest | Mencari batas kemampuan sistem |
+| soakTest | Menguji kestabilan sistem dalam waktu lama |
+
+Contoh penggunaan:
+
+```javascript
+import { loadTest } from '../../scenarios/loadTest.js';
+
+export const options = {
+    scenarios: {
+        load_test: loadTest
+    }
+}
+```
+
+---
+
+# 📊 Threshold
+
+Threshold disimpan pada
+
+```
+config/thresholds.js
+```
+
+Contoh
+
+```javascript
+export const performanceThresholds = {
+    http_req_failed: ['rate<0.01'],
+    http_req_duration: ['p(95)<500']
+};
+```
+
+---
+
+# 👤 Test Data
+
+Seluruh akun testing berada pada
+
+```
+data/user.data.js
+```
+
+Contoh
+
+```javascript
+export const users = [
+    {
+        phone_number: '08xxxxxxxxxx',
+        pin: '123456'
+    }
+];
+```
+
+Pada saat `setup()`, seluruh akun akan login dan token akan digunakan bergantian oleh setiap Virtual User (VU).
+
+---
+
+# 🔁 Flow Test
+
+```
+Setup
+   │
+   ├── Login seluruh user
+   │
+   ├── Ambil Access Token
+   │
+   └── Simpan Token
+            │
+            ▼
+Default Function
+            │
+            ├── Pilih token berdasarkan VU
+            │
+            ├── Hit API
+            │
+            ├── Validasi Response
+            │
+            └── Sleep
+                    │
+                    ▼
+Generate Report
+```
+
+---
+
+# 📈 Report
+
+Report HTML akan otomatis dibuat pada folder
+
+```
+reports/
+```
+
+Nama report menggunakan timestamp agar tidak tertimpa.
+
+Contoh
+
+```
+ListKunjungan_20260722_103012.html
+```
+
+---
+
+# ➕ Menambahkan Endpoint Baru
+
+1. Tambahkan service baru pada folder
+
+```
+services/
+```
+
+2. Buat file test baru
+
+```
+tests/
+```
+
+3. Import service
+
+```javascript
+import { getListKunjungan } from '../../services/kunjungan.service.js';
+```
+
+4. Pilih scenario
+
+```javascript
+import { loadTest } from '../../scenarios/loadTest.js';
+```
+
+5. Jalankan test
+
+```bash
+k6 run ...
+```
+
+---
+
+# 🧪 Best Practice
+
+- Gunakan **setup()** untuk login dan mendapatkan token.
+- Jangan melakukan login pada setiap iterasi.
+- Pisahkan service dan test.
+- Gunakan scenario yang sesuai dengan tujuan pengujian.
+- Simpan seluruh threshold pada `config/thresholds.js`.
+- Simpan seluruh test data pada `data/`.
+
+---
+
+# 📋 Scenario Recommendation
+
+| Jenis Test | Scenario |
+|------------|----------|
+| Smoke Test | warmUp |
+| Load Test | loadTest |
+| Spike Test | spikeTest |
+| Stress Test | stressTest |
+| Endurance Test | soakTest |
+
+---
+
+# 👨‍💻 Author
+
+QA Performance Testing
+
+Built with ❤️ using **k6**

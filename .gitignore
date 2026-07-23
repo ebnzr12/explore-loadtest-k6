@@ -5,6 +5,8 @@ node_modules/
 build/
 Report_Performance/
 backend/data/result.json
+k6/config/environment.js
+k6/data
 
 # Local env files
 .env
